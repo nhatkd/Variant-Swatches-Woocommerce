@@ -97,7 +97,50 @@
 		} );
 	}
 
+	/**
+	 * The product's main price (e.g. "549 kr. – 649 kr." for a variable product), outside the form and not in a
+	 * related/upsell loop. Mark another element with data-vsw-price to target it instead.
+	 */
+	function mainPrice( $form ) {
+		var $scope = $form.closest( '.product, [id^="product-"]' );
+		if ( ! $scope.length ) {
+			$scope = $( document.body );
+		}
+		var $marked = $scope.find( '[data-vsw-price]' ).first();
+		if ( $marked.length ) {
+			return $marked;
+		}
+		return $scope
+			.find( '.price' )
+			.filter( function () {
+				return ! $form[ 0 ].contains( this ) &&
+					! $( this ).parent().closest( '.price, .products, .related, .upsells, .cross-sells, .elementor-loop-container, .jet-listing-grid, .jet-woo-products' ).length;
+			} )
+			.first();
+	}
+
+	// Show the chosen variation's price in the main price; restore the range when the choice is cleared.
+	function showVariationPrice( $form, variation ) {
+		var $price = mainPrice( $form );
+		if ( ! $price.length ) {
+			return;
+		}
+		if ( undefined === $price.data( 'vsw-original' ) ) {
+			$price.data( 'vsw-original', $price.html() );
+		}
+		var html = variation && variation.price_html ? $( '<div>' ).html( variation.price_html ).find( '.price' ).html() : '';
+		$price.html( html || $price.data( 'vsw-original' ) );
+		// WooCommerce repeats the price above "Add to cart"; hide that copy while the main price shows it.
+		$form.toggleClass( 'vsw-price-synced', !! html );
+	}
+
 	$( document )
+		.on( 'found_variation', '.variations_form', function ( event, variation ) {
+			showVariationPrice( $( this ), variation );
+		} )
+		.on( 'reset_data', '.variations_form', function () {
+			showVariationPrice( $( this ), null );
+		} )
 		.on( 'change', '.vsw__input', function () {
 			var $select = selectFor( $( this ).closest( '.vsw' ) );
 			if ( $select.val() !== this.value ) {

@@ -38,7 +38,7 @@
 
 		// The "Add new term" form is submitted with AJAX and not reloaded: reset our fields afterwards.
 		$( document ).ajaxComplete( function ( event, xhr, settings ) {
-			if ( settings && typeof settings.data === 'string' && settings.data.indexOf( 'action=add-tag' ) !== -1 && ! $( '#ajax-response .error' ).length ) {
+			if ( settings && typeof settings.data === 'string' && settings.data.indexOf( 'action=add-tag' ) !== -1 && ! $( '#ajax-response' ).find( '.error, .notice-error' ).length ) {
 				$( '#addtag .vsw-color-field' ).wpColorPicker( 'color', '' ).val( '' );
 				$( '#addtag .vsw-image-remove' ).trigger( 'click' );
 			}

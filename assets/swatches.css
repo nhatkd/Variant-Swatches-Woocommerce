@@ -91,6 +91,10 @@
 
 .vsw__image { flex: none; width: 34px; height: 34px; object-fit: cover; }
 
+/* Image group where a term only has a colour (or nothing): same size as the images. */
+.vsw--image .vsw__swatch { width: 34px; height: 34px; border-radius: 0; }
+.vsw--image .vsw__item:not(:has(.vsw__image, .vsw__swatch)) { padding-left: .9rem; }
+
 /* Combination that does not exist or is sold out: visible, crossed out, not selectable. */
 .vsw__item.is-unavailable {
 	color: var(--vsw-muted);
@@ -100,6 +104,8 @@
 .vsw__item.is-unavailable:hover { border-color: var(--vsw-line); }
 .vsw__item.is-unavailable .vsw__swatch,
 .vsw__item.is-unavailable .vsw__image { opacity: .45; }
+
+.vsw-price-synced .woocommerce-variation-price { display: none; }
 
 .vsw-current { font-weight: 400; color: var(--vsw-muted, #666); }
 

@@ -81,7 +81,7 @@ class VSW_Frontend {
 					<input class="vsw__input" type="radio" name="<?php echo esc_attr( $group_name ); ?>" value="<?php echo esc_attr( $item['value'] ); ?>" <?php checked( $selected, $item['value'] ); ?>>
 					<?php if ( 'image' === $type && $item['image'] ) : ?>
 						<?php echo wp_get_attachment_image( $item['image'], 'thumbnail', false, array( 'class' => 'vsw__image', 'alt' => '' ) ); ?>
-					<?php elseif ( 'color' === $type ) : ?>
+					<?php elseif ( 'color' === $type || $item['color'] ) : // Also a term with only a colour in an image group. ?>
 						<span class="vsw__swatch" aria-hidden="true" style="--vsw-color: <?php echo esc_attr( $item['color'] ?: 'transparent' ); ?>"></span>
 					<?php endif; ?>
 					<span class="vsw__label"><?php echo esc_html( $item['label'] ); ?></span>

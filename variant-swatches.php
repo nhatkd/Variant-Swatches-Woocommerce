@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Variant Swatches
  * Description:       Replaces WooCommerce variation dropdowns with accessible buttons, colour swatches and image swatches. Works with any theme or page builder (Elementor, JetWooBuilder) because it hooks into WooCommerce itself.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'VSW_VERSION', '1.1.0' );
+define( 'VSW_VERSION', '1.1.1' );
 define( 'VSW_FILE', __FILE__ );
 define( 'VSW_URL', plugin_dir_url( __FILE__ ) );
 define( 'VSW_PATH', plugin_dir_path( __FILE__ ) );

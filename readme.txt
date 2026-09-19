@@ -1,7 +1,7 @@
 === Variant Swatches ===
 Requires at least: 6.5
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL-2.0-or-later
 
 Replaces WooCommerce variation dropdowns with buttons, colour swatches and image swatches.
@@ -44,6 +44,9 @@ Danish (da_DK) is bundled in languages/. Regenerate after changing strings:
     wp i18n make-mo languages && wp i18n make-php languages
 
 == Changelog ==
+
+= 1.1.1 =
+* No second "Clear" link from Elementor's hidden sticky clone after choosing a variation.
 
 = 1.1.0 =
 * Main product price follows the chosen variation.

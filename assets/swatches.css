@@ -107,6 +107,12 @@
 
 .vsw-price-synced .woocommerce-variation-price { display: none; }
 
+/*
+ * Elementor's sticky effect leaves a hidden clone of the column (.elementor-sticky__spacer). WooCommerce puts an
+ * inline visibility: visible on the Clear link once a choice is made, so the clone's link would show as a second "Clear".
+ */
+.elementor-sticky__spacer .reset_variations { visibility: hidden !important; }
+
 .vsw-current { font-weight: 400; color: var(--vsw-muted, #666); }
 
 @media (prefers-reduced-motion: reduce) {

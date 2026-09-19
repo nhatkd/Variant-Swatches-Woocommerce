@@ -1,0 +1,108 @@
+/* Variant Swatches. Colours follow the Elementor kit when present; override the --vsw-* properties per site. */
+
+.vsw-field { position: relative; }
+
+.vsw-field select.vsw-select {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	clip-path: inset(50%) !important;
+	border: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none;
+}
+
+.vsw {
+	--vsw-ink: var(--e-global-color-primary, #111);
+	--vsw-bg: #fff;
+	--vsw-line: #e7e7e5;
+	--vsw-muted: var(--e-global-color-secondary, #666);
+	--vsw-gap: 6px;
+	--vsw-height: 44px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--vsw-gap);
+}
+
+.vsw--button {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+}
+
+.vsw__item {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .6rem;
+	min-height: var(--vsw-height);
+	margin: 0;
+	padding: 0 .9rem;
+	border: 1px solid var(--vsw-line);
+	background: var(--vsw-bg);
+	color: var(--vsw-ink);
+	font-size: .875rem;
+	font-weight: 400;
+	line-height: 1.2;
+	cursor: pointer;
+	transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.vsw--button .vsw__item { padding: 0 .5rem; font-variant-numeric: tabular-nums; }
+.vsw--color .vsw__item { padding: 0 .9rem 0 .7rem; font-size: .8125rem; }
+.vsw--image .vsw__item { padding: 4px .9rem 4px 4px; font-size: .8125rem; }
+
+.vsw__input {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: inherit;
+}
+
+.vsw__item:hover { border-color: var(--vsw-ink); }
+.vsw__item:has(.vsw__input:focus-visible) { outline: 2px solid var(--vsw-ink); outline-offset: 2px; }
+
+.vsw--button .vsw__item.is-selected {
+	background: var(--vsw-ink);
+	border-color: var(--vsw-ink);
+	color: var(--vsw-bg);
+}
+
+.vsw--color .vsw__item.is-selected,
+.vsw--image .vsw__item.is-selected {
+	border-color: var(--vsw-ink);
+	box-shadow: inset 0 0 0 1px var(--vsw-ink);
+}
+
+.vsw__swatch {
+	flex: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--vsw-color);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+}
+
+.vsw__image { flex: none; width: 34px; height: 34px; object-fit: cover; }
+
+/* Combination that does not exist or is sold out: visible, crossed out, not selectable. */
+.vsw__item.is-unavailable {
+	color: var(--vsw-muted);
+	cursor: not-allowed;
+	background-image: linear-gradient(to top left, transparent calc(50% - .5px), var(--vsw-line) 50%, transparent calc(50% + .5px));
+}
+.vsw__item.is-unavailable:hover { border-color: var(--vsw-line); }
+.vsw__item.is-unavailable .vsw__swatch,
+.vsw__item.is-unavailable .vsw__image { opacity: .45; }
+
+.vsw-current { font-weight: 400; color: var(--vsw-muted, #666); }
+
+@media (prefers-reduced-motion: reduce) {
+	.vsw__item { transition: none; }
+}
